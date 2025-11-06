@@ -1,0 +1,22 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Java/IDE
+*.class
+*.log
+*.ctxt
+.hs_err_pid*
+.recommenders/
+
+# VS Code / IntelliJ / Eclipse
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# SO
+.DS_Store
+Thumbs.db

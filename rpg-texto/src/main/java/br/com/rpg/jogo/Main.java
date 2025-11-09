@@ -4,13 +4,14 @@ import br.com.rpg.modelo.item.*;
 
 public class Main {
     public static void main(String[] args) {
-        Item pocao = new Item("Pocao de cura", TipoEfeito.CURA, 1);
-        System.out.println(pocao);
+        Inventario inv = new Inventario();
+        inv.adicionar(new Item("Pocao de cura", TipoEfeito.CURA, 1));
+        System.out.println(inv.ListaOrdenada().size());
+        System.out.println("Antes de remover Item");
+        inv.listar();
 
-        pocao.incrementar(2);
-        System.out.println(pocao);
-
-        Item pocaoDano = new Item("Pocao de dano", TipoEfeito.DANO_DIRETO, 2);
-        System.out.println(pocaoDano);
+        inv.remover("Pocao de cura", 1);
+        inv.listar();
+        
     }
 }

@@ -13,12 +13,18 @@ public class Item implements Comparable<Item>{
         this.quantidade = quantidade;
     }
 
+    public Item(Item outro){
+        this.nome = outro.nome;
+        this.efeito = outro.efeito;
+        this.quantidade = outro.quantidade;
+    }
+
     public int getQuantidade(){
         return this.quantidade;
     }
 
     public TipoEfeito getEfeito(){
-        return this.efeito;
+        return efeito;
     }
 
     public String getNome(){

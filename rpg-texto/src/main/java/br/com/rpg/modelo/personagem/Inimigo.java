@@ -41,7 +41,7 @@ public class Inimigo extends Personagem{
         System.out.println(nome + " ataca " + alvo.getNome() + " e causa " + dano + " de dano!");
     }
 
-    public static Inimigo crairLoboDaNevoa(int nivel){
+    public static Inimigo criarLoboDaNevoa(int nivel){
         Inimigo lobo = new Inimigo("Lobo da Nevoa", "Lobo", 14 + 2*nivel,5 + nivel, 2 + nivel/2, nivel);
         lobo.getInventario().adicionar(new Item("Fatiar", TipoEfeito.DANO_DIRETO, 1));
         return lobo;
@@ -54,7 +54,7 @@ public class Inimigo extends Personagem{
     }
 
     public static Inimigo criarBruxaDoPantano(int nivel){
-        Inimigo bruxa = new Inimigo("Bruxa do Pantano", "Bruxa", 20 + 2*nivel, 7 + nivel, 2 + nivel/2 + nivel, nivel);
+        Inimigo bruxa = new Inimigo("Bruxa do Pantano", "Bruxa", 16 + 2*nivel, 7 + nivel, 1 + nivel/2 + nivel, nivel);
         bruxa.getInventario().adicionar(new Item("Agua da Vida", TipoEfeito.CURA, 1));
         return bruxa;
     }

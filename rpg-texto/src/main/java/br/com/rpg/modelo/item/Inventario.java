@@ -60,6 +60,14 @@ public class Inventario {
         return false;
     }
 
+    public String nomeDeUmItemCom(TipoEfeito tipo) {
+    for (Item i : itens) {
+        if (i.getEfeito() == tipo && i.getQuantidade() > 0)
+            return i.getNome();
+    }
+    return null;
+}
+
     public List<Item> ListaOrdenada(){
         List<Item> copia = new ArrayList<>();
         for(Item i : itens) {

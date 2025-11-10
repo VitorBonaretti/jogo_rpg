@@ -34,6 +34,18 @@ public abstract class Personagem{
 
     public abstract void atacar(Personagem alvo);
 
+    public Inventario getInventario(){
+        return inventario;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public int getDefesa(){
+        return defesa;
+    }
+
     public void usarItem(String nomeItem){
         Item item = inventario.buscarItem(nomeItem);
         int totalCura;

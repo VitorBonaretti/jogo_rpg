@@ -51,6 +51,15 @@ public class Inventario {
         return null;
     }
 
+    public boolean temItemDe(TipoEfeito tipo){
+        for(Item i : itens){
+            if(i.getEfeito() == tipo && i.getQuantidade() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Item> ListaOrdenada(){
         List<Item> copia = new ArrayList<>();
         for(Item i : itens) {

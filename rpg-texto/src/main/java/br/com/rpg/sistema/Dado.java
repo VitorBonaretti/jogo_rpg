@@ -1,18 +1,17 @@
 package br.com.rpg.sistema;
 
+import java.util.Random;
 
-public class Dado{
-    private int faces;
-    private int numeroDados;
+public class Dado {
+    private static final Random RANDOM = new Random();
 
-    public Dado(int faces, int numeroDados){
-        this.faces = faces;
-        this.numeroDados = numeroDados;
+    public static int rolar(int lados) {
+        if (lados <= 0) throw new IllegalArgumentException("lados deve ser > 0");
+        return RANDOM.nextInt(lados) + 1;
     }
 
-    public int rolar(int faces){
-        System.out.println("Hello World!");
-        faces = 3;
-        return faces;
+    public static int rolarPercentual() { 
+        return rolar(100); 
     }
+    
 }

@@ -68,7 +68,7 @@ public class Inventario {
     return null;
 }
 
-    public List<Item> ListaOrdenada(){
+    public List<Item> listaOrdenada(){
         List<Item> copia = new ArrayList<>();
         for(Item i : itens) {
             copia.add(new Item(i));
@@ -85,7 +85,7 @@ public class Inventario {
     }
 
 
-    public Inventario CopiaProfunda() {
+    public Inventario copiaProfunda() {
         List<Item> nova = new ArrayList<>();
         for (Item i : this.itens){
             nova.add(new Item(i));

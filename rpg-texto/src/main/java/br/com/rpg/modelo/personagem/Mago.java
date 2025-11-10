@@ -7,6 +7,10 @@ public class Mago extends Personagem{
         super(nome, 20, 8, 2, 1);
     }
 
+    public Mago(Mago outro){
+        super(outro);
+    }
+
     @Override
     public void atacar(Personagem alvo){
         int rolagem = Dado.rolar(6);

@@ -15,7 +15,7 @@ public final class SistemaDeCombate {
     private static final Scanner SC = new Scanner(System.in);
 
     public static void batalhar(Personagem jogador, Inimigo inimigo){
-        System.out.printf("⚔️  Combate iniciado: %s vs %s%n", jogador.getNome(), inimigo.getNome());
+        System.out.printf("Combate iniciado: %s vs %s%n", jogador.getNome(), inimigo.getNome());
         Dado dado = new Dado();
 
         while (jogador.estaVivo() && inimigo.estaVivo()){
@@ -28,43 +28,57 @@ public final class SistemaDeCombate {
 
         if(jogador.estaVivo()){
             jogador.restaurarVidaTotal();
-            System.out.println("🏆 Vitória!");
+            System.out.println("Vitória!");
             aplicarLoot(jogador, inimigo);
         }else{
-            System.out.println("☠️ Derrota...");
+            System.out.println("Derrota...");
         }
     }
 
     private static void executarTurnoDoJogador(Personagem jogador, Inimigo inimigo){
-        System.out.println("\n👉 Seu turno!");
-        boolean executou = false;
-        while (!executou) {
-            int acao = menu(
-                "1) Atacar",
-                "2) Usar item",
-                "3) Status",
-                "4) Inventário"
-            );
-            switch (acao) {
-                case 1 -> {
-                    jogador.atacar(inimigo);
-                    executou = true;
-                }
-                case 2 -> {
-                    if (usarItemDoInventario(jogador, inimigo)) {
+    System.out.println("\nSeu turno!");
+    boolean executou = false;
+    while (!executou) {
+        int acao = menu(
+            "1) Atacar",
+            "2) Usar item",
+            "3) Status",
+            "4) Inventário",
+            "5) Fugir"
+        );
+        switch (acao) {
+            case 1 -> {
+                jogador.atacar(inimigo);
+                executou = true;
+            }
+            case 2 -> {
+                if (usarItemDoInventario(jogador, inimigo)) executou = true;
+                else System.out.println("Nenhum item usado.");
+            }
+            case 3 -> jogador.exibirStatus();
+            case 4 -> jogador.getInventario().listar();
+            case 5 -> {
+                if (inimigo.isChefeFinal()) {
+                    System.out.println("Não há para onde fugir diante do Chefe Final!");
+                    executou = false;
+                } else{
+                    int rolagem = Dado.rolar(20);
+                    if (rolagem >= 15) {
+                        System.out.println("> (d20=" + rolagem + ") Você escapou com sucesso!");
+                        inimigo.receberDano(inimigo.getPontosVida());
                         executou = true;
-                    } else {
-                        System.out.println("Nenhum item usado.");
+                }   else {
+                        System.out.println("> (d20=" + rolagem + ") Tentou fugir, mas o inimigo te alcançou!");
+                        executou = true;
                     }
                 }
-                case 3 -> jogador.exibirStatus();
-                case 4 -> jogador.getInventario().listar();
             }
         }
     }
+}
 
     private static void executarAcaoDoInimigo(AcaoIA acao, Inimigo inimigo, Personagem jogador){
-        System.out.println("\n👹 Turno do inimigo");
+        System.out.println("\nTurno do inimigo");
 
         switch(acao){
             case USAR_ITEM -> {
@@ -80,8 +94,8 @@ public final class SistemaDeCombate {
     }
 
     private static void aplicarLoot(Personagem jogador, Inimigo inimigo){
-        Inventario drop = inimigo.getInventario().CopiaProfunda();
-        for(Item i : drop.ListaOrdenada()){
+        Inventario drop = inimigo.getInventario().copiaProfunda();
+        for(Item i : drop.listaOrdenada()){
             if(i.getQuantidade() > 0 && Dado.rolar(100) <= 50){
                 jogador.getInventario().adicionar(new Item(i.getNome(), i.getEfeito(), 1));
                 System.out.println("Você saqueou 1x " + i.getNome() + ".");
@@ -103,7 +117,7 @@ public final class SistemaDeCombate {
     }
 
     private static boolean usarItemDoInventario(Personagem p, Personagem alvoInimigo){
-    var itens = p.getInventario().ListaOrdenada();
+    var itens = p.getInventario().listaOrdenada();
     if (itens.isEmpty()){
         System.out.println("Inventário vazio.");
         return false;
@@ -120,18 +134,17 @@ public final class SistemaDeCombate {
     try { idx = Integer.parseInt(entrada) - 1; }
     catch (NumberFormatException e) { System.out.println("Entrada inválida."); return false; }
 
-    if (idx == -1) return false;                    // 0) Voltar
-    if (idx < 0 || idx >= itens.size()){            // fora do range
+    if (idx == -1) return false;
+    if (idx < 0 || idx >= itens.size()){
         System.out.println("Opção inválida.");
         return false;
     }
 
     Item escolhido = itens.get(idx);
     if (escolhido.getEfeito() == TipoEfeito.DANO_DIRETO) {
-        // 👇 usa alvoInimigo como alvo do dano direto
         p.usarItem(escolhido.getNome(), alvoInimigo);
     } else {
-        p.usarItem(escolhido.getNome());            // cura/buff
+        p.usarItem(escolhido.getNome());
     }
     return true;
 }

@@ -26,6 +26,16 @@ public abstract class Personagem{
         this(nome, pontosVida, ataque, defesa, nivel, new Inventario());
     }
 
+    public Personagem(Personagem outro) {
+        this.nome = outro.nome;
+        this.pontosVida = outro.pontosVida;
+        this.pontosVidaMax = outro.pontosVidaMax;
+        this.ataque = outro.ataque;
+        this.defesa = outro.defesa;
+        this.nivel = outro.nivel;
+        this.inventario = outro.inventario.copiaProfunda();
+    }
+
     public Inventario getInventario(){
         return inventario;
     }

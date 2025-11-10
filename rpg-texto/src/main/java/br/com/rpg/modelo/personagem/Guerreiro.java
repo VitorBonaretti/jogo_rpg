@@ -7,6 +7,10 @@ public class Guerreiro extends Personagem{
         super(nome, 30, 6, 5, 1);
     }
 
+    public Guerreiro(Guerreiro outro){
+        super(outro);
+    }
+
     @Override
     public void atacar(Personagem alvo){
         int rolagem = Dado.rolar(6);

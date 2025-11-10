@@ -18,6 +18,13 @@ public class Inimigo extends Personagem{
         this.ia = IAComportamento.AGRESSIVO;
     }
 
+    public Inimigo(Inimigo outro){
+        super(outro);
+        this.especie = outro.especie;
+        this.ia = outro.ia;
+    }
+
+
     public String getEspecie(){
         return especie;
     }
@@ -70,6 +77,12 @@ public class Inimigo extends Personagem{
         return alquimista;
     }
 
+    public boolean isChefeFinal() {
+    return (especie != null && especie.equalsIgnoreCase("Chefe final"))
+        || (nome != null && nome.equalsIgnoreCase("Alquimista"));
+    }
+
+
     public enum AcaoIA{
         ATACAR,
         USAR_ITEM,
@@ -77,23 +90,27 @@ public class Inimigo extends Personagem{
     }
 
     public AcaoIA decidirAcao(Personagem jogador, Dado dado){
-        if(this.pontosVida <=(int)(0.3 * this.pontosVida) && inventario.temItemDe(TipoEfeito.CURA)){
+        // condição baseada na porcentagem real de vida máxima
+        double porcentagemVida = (double)this.pontosVida / this.pontosVidaMax;
+
+        if(porcentagemVida <= 0.3 && inventario.temItemDe(TipoEfeito.CURA)){
             if(Dado.rolar(100) <= 35) return AcaoIA.USAR_ITEM;
         }
 
-        if(this.pontosVida <=(int)(0.3 * this.pontosVida) && inventario.temItemDe(TipoEfeito.BUFF_ATAQUE)){
+        if(porcentagemVida <= 0.4 && inventario.temItemDe(TipoEfeito.BUFF_ATAQUE)){
             if(Dado.rolar(100) <= 25) return AcaoIA.USAR_ITEM;
         }
 
-        if(this.pontosVida <=(int)(0.3 * this.pontosVida) && inventario.temItemDe(TipoEfeito.BUFF_DEFESA)){
+        if(porcentagemVida <= 0.5 && inventario.temItemDe(TipoEfeito.BUFF_DEFESA)){
             if(Dado.rolar(100) <= 40) return AcaoIA.USAR_ITEM;
         }
 
-        if(this.pontosVida <=(int)(0.3 * this.pontosVida) && inventario.temItemDe(TipoEfeito.DANO_DIRETO)){
+        if(porcentagemVida <= 0.6 && inventario.temItemDe(TipoEfeito.DANO_DIRETO)){
             if(Dado.rolar(100) <= 20) return AcaoIA.USAR_ITEM;
         }
 
         return AcaoIA.ATACAR;
     }
+
 
 }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import br.com.rpg.modelo.item.*;
 import br.com.rpg.modelo.personagem.*;
+import br.com.rpg.sistema.Dado;
 import br.com.rpg.sistema.SistemaDeCombate;
 
 public class Main {
@@ -23,6 +24,8 @@ public class Main {
         narrativa("Sua busca começa ao norte, onde uivos rasgam o nevoeiro...");
 
         esperarEnter("\n[Capítulo 1] Trilha Enevoada — pressione ENTER para continuar");
+        narrativa("Andando nessa estrada tortuosa ao virar uma esqueni você encontra...");
+        eventoAleatorio(heroi);
         Inimigo lobo = Inimigo.criarLoboDaNevoa(1);
         narrativa("Entre a névoa, um vulto surge: um Lobo da Névoa com olhos cintilantes aparece!");
         SistemaDeCombate.batalhar(heroi, lobo);
@@ -34,6 +37,8 @@ public class Main {
         if (escolha == 1) {
             esperarEnter("\n[Capítulo 2] As Ruínas Silenciosas — ENTER");
             narrativa("Você adentra corredores cobertos de musgo. Runas antigas brilham nas paredes.");
+            narrativa("Você decide olhar em voltar para ver se entra alguma reliquia perdida por entre os corredores");
+            eventoAleatorio(heroi);
             Inimigo golem = Inimigo.criarGolemEnfeiticado(2);
             narrativa("Um estrondo ecoa — um Golem Enfeitiçado desperta das pedras e avança!");
             SistemaDeCombate.batalhar(heroi, golem);
@@ -41,6 +46,8 @@ public class Main {
         } else {
             esperarEnter("\n[Capítulo 2B] Bosque Alquímico — ENTER");
             narrativa("As árvores se curvam, os galhos parecem observá-lo. Frascos pendem das copas.");
+            narrativa("Ao longe você vê uma das arvores com um buraco no meio, ao olhar dentro dela...");
+            eventoAleatorio(heroi);
             Inimigo corvo = Inimigo.criarCorvoAlquimico(2);
             narrativa("Um grasnar metálico corta o ar — um Corvo Alquímico surge das sombras!");
             SistemaDeCombate.batalhar(heroi, corvo);
@@ -49,6 +56,8 @@ public class Main {
 
         esperarEnter("\n[Capítulo 3] Pântano das Lamentações — ENTER");
         narrativa("Você alcança o pântano. A água turva ferve com uma energia esverdeada.");
+        narrativa("Andando pelos lamaçais do pantano você se depara com algo se mexendo na agua...");
+        eventoAleatorio(heroi);
         Inimigo bruxa = Inimigo.criarBruxaDoPantano(3);
         narrativa("Das sombras, surge uma velha de olhos vazios: 'Só passarás se sobreviveres, forasteiro!'");
         SistemaDeCombate.batalhar(heroi, bruxa);
@@ -64,7 +73,7 @@ public class Main {
 
         narrativa("\nA luz retorna à floresta. O nevoeiro recua.");
         narrativa("Você libertou a Ravina da Névoa e derrotou o Alquimista!");
-        System.out.println("\n🏆 PARABÉNS, " + heroi.getNome().toUpperCase() + "! Você venceu o jogo!");
+        System.out.println("\nPARABÉNS, " + heroi.getNome().toUpperCase() + "! Você venceu o jogo!");
     }
 
     private static Personagem escolherClasse() {
@@ -111,6 +120,21 @@ public class Main {
         System.out.println(msg);
         scanner.nextLine();
     }
+
+    private static void eventoAleatorio(Personagem heroi) {
+    int rolagem = Dado.rolar(100);
+    if (rolagem <= 20) {
+        int dano = Dado.rolar(4);
+        heroi.receberDano(dano);
+        System.out.println("Uma armadilha foi acionada! Você perde " + dano + " de vida.");
+    } else if (rolagem <= 40) {
+        heroi.getInventario().adicionar(new Item("Pequena Poção", TipoEfeito.CURA, 1));
+        System.out.println("Você encontrou uma bolsa caída: +1 Poção de Cura!");
+    } else {
+        System.out.println("Nada de interessante encontrado durante a exploração.");
+    }
+}
+
 
     private static void encerrar(String msg) {
         System.out.println("\n" + msg);

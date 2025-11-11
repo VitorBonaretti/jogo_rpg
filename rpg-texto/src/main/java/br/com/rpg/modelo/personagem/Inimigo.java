@@ -50,25 +50,25 @@ public class Inimigo extends Personagem{
 
     public static Inimigo criarLoboDaNevoa(int nivel){
         Inimigo lobo = new Inimigo("Lobo da Nevoa", "Lobo", 14 + 2*nivel,5 + nivel, 2 + nivel/2, nivel);
-        lobo.getInventario().adicionar(new Item("Fatiar", TipoEfeito.DANO_DIRETO, 1));
+        lobo.getInventario().adicionar(new Item("Fatiar - 6 de dano mais dado de 1-6", TipoEfeito.DANO_DIRETO, 1));
         return lobo;
     }
 
     public static Inimigo criarCorvoAlquimico(int nivel){
         Inimigo corvo = new Inimigo("Corvo Alquimico", "Corvo", 12 + 2*nivel, 6 + nivel, 1 + nivel/2, nivel);
-        corvo.getInventario().adicionar(new Item("Tonico de aço", TipoEfeito.BUFF_ATAQUE, 1));
+        corvo.getInventario().adicionar(new Item("Elixir de Foco - +2 de ataque", TipoEfeito.BUFF_ATAQUE, 1));
         return corvo;
     }
 
     public static Inimigo criarBruxaDoPantano(int nivel){
         Inimigo bruxa = new Inimigo("Bruxa do Pantano", "Bruxa", 16 + 2*nivel, 7 + nivel, 1 + nivel/2 + nivel, nivel);
-        bruxa.getInventario().adicionar(new Item("Agua da Vida", TipoEfeito.CURA, 1));
+        bruxa.getInventario().adicionar(new Item("Poção de Cura - +20 de vida", TipoEfeito.CURA, 1));
         return bruxa;
     }
 
     public static Inimigo criarGolemEnfeiticado(int nivel){
         Inimigo golem = new Inimigo("Golem Enfeiticado", "Golem", 22 + 2*nivel, 4 + nivel, 4 + nivel/2 + nivel, nivel);
-        golem.getInventario().adicionar(new Item("Carapaça de Pedra", TipoEfeito.BUFF_DEFESA, 1));
+        golem.getInventario().adicionar(new Item("Manto Reforçado - +2 de defesa", TipoEfeito.BUFF_DEFESA, 1));
         return golem;
     }
 

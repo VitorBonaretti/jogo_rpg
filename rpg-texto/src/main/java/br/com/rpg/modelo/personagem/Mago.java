@@ -4,7 +4,7 @@ import br.com.rpg.sistema.Dado;
 
 public class Mago extends Personagem{
     public Mago(String nome){
-        super(nome, 20, 8, 2, 1);
+        super(nome, 23, 12, 3, 1);
     }
 
     public Mago(Mago outro){

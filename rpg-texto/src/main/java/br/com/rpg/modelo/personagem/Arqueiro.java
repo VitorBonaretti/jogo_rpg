@@ -4,7 +4,7 @@ import br.com.rpg.sistema.Dado;
 
 public class Arqueiro extends Personagem{
     public Arqueiro(String nome){
-        super(nome, 28, 6, 5, 1);
+        super(nome, 27, 10, 4, 1);
     }
 
     public Arqueiro(Arqueiro outro){

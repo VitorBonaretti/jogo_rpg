@@ -117,7 +117,7 @@ public abstract class Personagem{
 
         switch (item.getEfeito()){
             case CURA -> {
-                int totalCura = 10 + (10 * nivel);
+                int totalCura = 20;
                 pontosVida += totalCura;
                 if (pontosVida > pontosVidaMax) pontosVida = pontosVidaMax;
                 System.out.println(nome + " usou " + nomeItem + " e recuperou " + totalCura + " de vida!");
@@ -139,7 +139,7 @@ public abstract class Personagem{
                     return;
                 }
                 int rolagem = Dado.rolar(6);
-                int dano = (this.ataque + rolagem) - alvo.getDefesa();
+                int dano = (6 + rolagem);
                 if (dano < 0) dano = 0;
                 alvo.receberDano(dano);
                 System.out.println(nome + " usou " + nomeItem + " (d6=" + rolagem + ") e causou " + dano + " de dano em " + alvo.getNome() + "!");

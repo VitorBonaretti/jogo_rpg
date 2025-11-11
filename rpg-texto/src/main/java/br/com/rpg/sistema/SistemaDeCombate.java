@@ -79,6 +79,7 @@ public final class SistemaDeCombate {
 
     private static void executarAcaoDoInimigo(AcaoIA acao, Inimigo inimigo, Personagem jogador){
         System.out.println("\nTurno do inimigo");
+        inimigo.exibirStatus();
 
         switch(acao){
             case USAR_ITEM -> {

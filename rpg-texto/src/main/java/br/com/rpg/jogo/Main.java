@@ -24,7 +24,7 @@ public class Main {
         narrativa("Sua busca começa ao norte, onde uivos rasgam o nevoeiro...");
 
         esperarEnter("\n[Capítulo 1] Trilha Enevoada — pressione ENTER para continuar");
-        narrativa("Andando nessa estrada tortuosa ao virar uma esqueni você encontra...");
+        narrativa("Andando nessa estrada tortuosa ao virar uma esquena você encontra...");
         eventoAleatorio(heroi);
         Inimigo lobo = Inimigo.criarLoboDaNevoa(1);
         narrativa("Entre a névoa, um vulto surge: um Lobo da Névoa com olhos cintilantes aparece!");
@@ -92,9 +92,9 @@ public class Main {
     }
 
     private static void darItensIniciais(Personagem heroi) {
-        heroi.getInventario().adicionar(new Item("Poção de Cura",    TipoEfeito.CURA,        3));
-        heroi.getInventario().adicionar(new Item("Elixir de Foco",   TipoEfeito.BUFF_ATAQUE, 1));
-        heroi.getInventario().adicionar(new Item("Manto Reforçado",  TipoEfeito.BUFF_DEFESA, 1));
+        heroi.getInventario().adicionar(new Item("Poção de Cura - +20 de vida",    TipoEfeito.CURA,        3));
+        heroi.getInventario().adicionar(new Item("Elixir de Foco - +2 de ataque",   TipoEfeito.BUFF_ATAQUE, 1));
+        heroi.getInventario().adicionar(new Item("Manto Reforçado - +2 de defesa",  TipoEfeito.BUFF_DEFESA, 1));
         System.out.println("\nVocê recebeu itens iniciais!");
     }
 
@@ -128,7 +128,7 @@ public class Main {
         heroi.receberDano(dano);
         System.out.println("Uma armadilha foi acionada! Você perde " + dano + " de vida.");
     } else if (rolagem <= 40) {
-        heroi.getInventario().adicionar(new Item("Pequena Poção", TipoEfeito.CURA, 1));
+        heroi.getInventario().adicionar(new Item("Poção de Cura - +20 de vida", TipoEfeito.CURA, 1));
         System.out.println("Você encontrou uma bolsa caída: +1 Poção de Cura!");
     } else {
         System.out.println("Nada de interessante encontrado durante a exploração.");
